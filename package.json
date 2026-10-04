@@ -1,0 +1,21 @@
+{
+  "name": "phishing-simulator",
+  "version": "1.0.0",
+  "description": "Educational phishing simulator using Microsoft 365 fake login page",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [
+    "phishing",
+    "security",
+    "education",
+    "ctf"
+  ],
+  "author": "Vinicius Sponchiado",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

